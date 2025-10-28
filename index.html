@@ -8,6 +8,28 @@
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
+  <!-- Interactive hero section with animated :: logo -->
+  <div class="hero">
+    <div class="logo-container" id="logoContainer">
+      <div class="colon-group left-colon">
+        <div class="colon-dot"></div>
+        <div class="colon-dot"></div>
+      </div>
+      <div class="colon-group right-colon">
+        <div class="colon-dot"></div>
+        <div class="colon-dot"></div>
+      </div>
+    </div>
+    <h1 class="hero-title">Quadrafolio</h1>
+    <p class="hero-subtitle">Early-Stage Investment Fund</p>
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M10 5L10 15M10 15L5 10M10 15L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
   <main class="card">
     <header class="header">
       <img class="logo" src="assets/logo.svg" alt="Quadrafolio logo" />
@@ -32,6 +54,42 @@
       © <span id="y"></span> Quadrafolio • <a href="#">Privacy</a> • <a href="#">Terms</a>
     </p>
   </main>
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Interactive parallax effect for :: logo
+    const logoContainer = document.getElementById('logoContainer');
+    const leftColon = document.querySelector('.left-colon');
+    const rightColon = document.querySelector('.right-colon');
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 40;
+      const y = (e.clientY / window.innerHeight - 0.5) * 40;
+
+      leftColon.style.transform = `translate(${-x}px, ${-y}px)`;
+      rightColon.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // Smooth scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.card, .hero-title, .hero-subtitle, .scroll-indicator').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Click to split/merge :: logo
+    let isSplit = false;
+    logoContainer.addEventListener('click', () => {
+      isSplit = !isSplit;
+      logoContainer.classList.toggle('split', isSplit);
+    });
+  </script>
 </body>
 </html>
