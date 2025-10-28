@@ -7,59 +7,11 @@
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <div class="ascii-container" id="asciiArt"></div>
-
-  <script>
-    const asciiPattern = `
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-
-
-
-
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    ++++++++              ++++++++
-    `.trim();
-
-    const container = document.getElementById('asciiArt');
-    const lines = asciiPattern.split('\n');
-
-    lines.forEach(line => {
-      const lineDiv = document.createElement('div');
-      lineDiv.className = 'ascii-line';
-
-      for (let char of line) {
-        const span = document.createElement('span');
-        span.textContent = char;
-        span.className = 'ascii-char';
-
-        if (char === '+') {
-          span.addEventListener('mouseenter', function() {
-            this.classList.add('active');
-          });
-
-          span.addEventListener('mouseleave', function() {
-            this.classList.remove('active');
-          });
-        }
-
-        lineDiv.appendChild(span);
-      }
-
-      container.appendChild(lineDiv);
-    });
-  </script>
+  <div class="circles">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
 </body>
 </html>
